@@ -1,9 +1,10 @@
 {
   "name": "vbocxjs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A ReactJS library for creating awesome banners and toasts.",
   "main": "lib/index.js",
   "files": ["lib"],
+  "homepage": "https://vbocxjs.netlify.app/",
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -c -w"
