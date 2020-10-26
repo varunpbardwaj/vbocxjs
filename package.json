@@ -1,10 +1,14 @@
 {
   "name": "vbocxjs",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "A ReactJS library for creating awesome banners and toasts.",
   "main": "lib/index.js",
   "files": ["lib"],
   "homepage": "https://vbocxjs.netlify.app/",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/varunpbardwaj/vbocxjs"
+  },
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -c -w"
@@ -23,7 +27,7 @@
     "typescript": "^4.0.3"
   },
   "peerDependencies": {
-    "react": "latest",
-    "react-dom": "latest"
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   }
 }
