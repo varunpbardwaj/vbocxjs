@@ -1,109 +1,128 @@
 import React, { useEffect } from 'react';
 import CustomToastProps from "../../props/custom-toast.props";
+import { render } from "react-dom";
 
 function CustomToast(props: CustomToastProps) {
 
 	const date = `error-${new Date().getTime()}`;
+	const bannerContainerId = `vbocxjs-custom-toast-container-${new Date().getTime()}`;
 
 	useEffect(() => {
+
+		const bannerContainer = document.createElement("div");
+		bannerContainer.id = bannerContainerId;
+		document.body.appendChild(bannerContainer);
+
 		const linkTag = document.createElement("link");
 		linkTag.href = "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
 		linkTag.rel = "stylesheet";
 		document.head.appendChild(linkTag);
 
-		if(props.animate && props.animate === "stretch-in-out" && document.getElementById(`${date}`)) {
-			document.getElementById(`${date}`).animate(
-				[
-					{ transform: 'scale3d(1, 1, 1)' }, 
-					{ transform: 'scale3d(1.2, 0.7, 1)' },
-					{ transform: 'scale3d(0.7, 1.2, 1)' }, 
-					{ transform: 'scale3d(1.1, 0.8, 1)' },
-					{ transform: 'scale3d(0.9, 1, 1)' },
-					{ transform: 'scale3d(1, 0.9, 1)' }, 
-					{ transform: 'scale3d(1, 1, 1)' },
-				],{
-					duration: 800,
-					iterations: 1
-				  }
-			);
-		} else if(props.animate && props.animate === "fade-in-out" && document.getElementById(`${date}`)) {
-			document.getElementById(`${date}`).animate(
-				[
-					{opacity: 0},
-					{opacity: 1}
-				], {
-					duration: 200,
-					iterations: 1
-				  }
-			);
-	}  else if(props.animate && props.animate === "zoom-in-out" && document.getElementById(`${date}`)) {
-			document.getElementById(`${date}`).animate(
-				[
-					{transform: 'scale3d(1.3, 1.3, 1.3)', opacity: 0},
-					{transform: 'scale3d(1, 1, 1)', opacity: 1}
-				], {
-					duration: 400,
-					iterations: 1
-				}
-			);
-	}
+		render(customToastChild(), document.getElementById(bannerContainerId));
 
-		if(document.getElementById(`${date}`)) {
-			if(props.timer) {
-				setTimeout(() => {
-					const removeElement = document.getElementById(`${date}`);
-					if(props.animate && props.animate === "stretch-in-out" && document.getElementById(`${date}`)) {
-						document.getElementById(`${date}`).animate(
-							[
-								{ transform: 'scale3d(1, 1, 1)' }, 
-								{ transform: 'scale3d(1.25, 0.75, 1)' },
-								{ transform: 'scale3d(0.75, 1.25, 1)' }, 
-								{ transform: 'scale3d(1.15, 0.85, 1)' },
-								{ transform: 'scale3d(0.95, 1.05, 1)' },
-								{ transform: 'scale3d(1.05, .95, 1)' }, 
-								{ transform: 'scale3d(1, 1, 1)' },
-							],{
-								duration: 800,
-								iterations: 1
-							}
-						);
-						setTimeout(() => {
-							document.getElementsByClassName("App")[0].removeChild(removeElement);
-						}, 1000);
-					} else if(props.animate && props.animate === "fade-in-out" && document.getElementById(`${date}`)) {
+		const observer = setInterval(function () {
+			if (document.getElementById(`${date}`)) {
+			  clearInterval(observer);
+			  if(props.animate && props.animate === "stretch-in-out" && document.getElementById(`${date}`)) {
+				document.getElementById(`${date}`).animate(
+					[
+						{ transform: 'scale3d(1, 1, 1)' }, 
+						{ transform: 'scale3d(1.2, 0.7, 1)' },
+						{ transform: 'scale3d(0.7, 1.2, 1)' }, 
+						{ transform: 'scale3d(1.1, 0.8, 1)' },
+						{ transform: 'scale3d(0.9, 1, 1)' },
+						{ transform: 'scale3d(1, 0.9, 1)' }, 
+						{ transform: 'scale3d(1, 1, 1)' },
+					],{
+						duration: 800,
+						iterations: 1
+					  }
+				);
+			} else if(props.animate && props.animate === "fade-in-out" && document.getElementById(`${date}`)) {
+				document.getElementById(`${date}`).animate(
+					[
+						{opacity: 0},
+						{opacity: 1}
+					], {
+						duration: 200,
+						iterations: 1
+					  }
+				);
+		}  else if(props.animate && props.animate === "zoom-in-out" && document.getElementById(`${date}`)) {
+				document.getElementById(`${date}`).animate(
+					[
+						{transform: 'scale3d(1.3, 1.3, 1.3)', opacity: 0},
+						{transform: 'scale3d(1, 1, 1)', opacity: 1}
+					], {
+						duration: 400,
+						iterations: 1
+					}
+				);
+		}
+	
+			if(document.getElementById(`${date}`)) {
+				if(props.timer) {
+					setTimeout(() => {
+						const removeElement = document.getElementById(`${date}`);
+						if(props.animate && props.animate === "stretch-in-out" && document.getElementById(`${date}`)) {
 							document.getElementById(`${date}`).animate(
 								[
-									{opacity: 1},
-									{opacity: 0}
-								], {
-									duration: 200,
+									{ transform: 'scale3d(1, 1, 1)' }, 
+									{ transform: 'scale3d(1.25, 0.75, 1)' },
+									{ transform: 'scale3d(0.75, 1.25, 1)' }, 
+									{ transform: 'scale3d(1.15, 0.85, 1)' },
+									{ transform: 'scale3d(0.95, 1.05, 1)' },
+									{ transform: 'scale3d(1.05, .95, 1)' }, 
+									{ transform: 'scale3d(1, 1, 1)' },
+								],{
+									duration: 800,
 									iterations: 1
 								}
 							);
 							setTimeout(() => {
-								document.getElementsByClassName("App")[0].removeChild(removeElement);
-							}, 150);
-					}    else if(props.animate && props.animate === "zoom-in-out" && document.getElementById(`${date}`)) {
-						document.getElementById(`${date}`).animate(
-							[
-								{transform: 'scale3d(1, 1, 1)', opacity: 1},
-								{transform: 'scale3d(1.2, 1.2, 1.2)', opacity: 0}
-							], {
-								duration: 400,
-								iterations: 1
-							  }
-						) 
-						setTimeout(() => {
-							document.getElementsByClassName("App")[0].removeChild(removeElement);
-						}, 350);
-					}  else {
-						if(document.getElementById(`${date}`)) {
-							document.getElementsByClassName("App")[0].removeChild(removeElement);
+								document.getElementById(bannerContainerId).removeChild(removeElement);
+								document.body.removeChild(document.getElementById(bannerContainerId));
+							}, 1000);
+						} else if(props.animate && props.animate === "fade-in-out" && document.getElementById(`${date}`)) {
+								document.getElementById(`${date}`).animate(
+									[
+										{opacity: 1},
+										{opacity: 0}
+									], {
+										duration: 200,
+										iterations: 1
+									}
+								);
+								setTimeout(() => {
+									document.getElementById(bannerContainerId).removeChild(removeElement);
+									document.body.removeChild(document.getElementById(bannerContainerId));
+								}, 150);
+						}    else if(props.animate && props.animate === "zoom-in-out" && document.getElementById(`${date}`)) {
+							document.getElementById(`${date}`).animate(
+								[
+									{transform: 'scale3d(1, 1, 1)', opacity: 1},
+									{transform: 'scale3d(1.2, 1.2, 1.2)', opacity: 0}
+								], {
+									duration: 400,
+									iterations: 1
+								  }
+							) 
+							setTimeout(() => {
+								document.getElementById(bannerContainerId).removeChild(removeElement);
+								document.body.removeChild(document.getElementById(bannerContainerId));
+							}, 350);
+						}  else {
+							if(document.getElementById(`${date}`)) {
+								document.getElementById(bannerContainerId).removeChild(removeElement);
+								document.body.removeChild(document.getElementById(bannerContainerId));
+							}
 						}
-					}
-				}, props.timer);
+					}, props.timer);
+				}
 			}
-		}
+			}
+		}, 1);
+
 	}, [props.timer, date]);
 
 	function bannerTop() {
@@ -140,7 +159,7 @@ function CustomToast(props: CustomToastProps) {
 				}
 			);
 			setTimeout(() => {
-				document.getElementsByClassName("App")[0].removeChild(removeElement);
+				document.getElementById(bannerContainerId).removeChild(removeElement);
 			}, 1000);
 		}  else if(props.animate && props.animate === "fade-in-out" && document.getElementById(`${date}`)) {
 					document.getElementById(`${date}`).animate(
@@ -153,7 +172,7 @@ function CustomToast(props: CustomToastProps) {
 						}
 					);
 					setTimeout(() => {
-						document.getElementsByClassName("App")[0].removeChild(removeElement);
+						document.getElementById(bannerContainerId).removeChild(removeElement);
 					}, 150);
 			}   else if(props.animate && props.animate === "zoom-in-out" && document.getElementById(`${date}`)) {
 				document.getElementById(`${date}`).animate(
@@ -166,18 +185,19 @@ function CustomToast(props: CustomToastProps) {
 					  }
 				) 
 				setTimeout(() => {
-					document.getElementsByClassName("App")[0].removeChild(removeElement);
+					document.getElementById(bannerContainerId).removeChild(removeElement);
 				}, 350);
 			} else {
 				alert()
 				if(document.getElementById(`${date}`)) {
-					document.getElementsByClassName("App")[0].removeChild(removeElement);
+					document.getElementById(bannerContainerId).removeChild(removeElement);
 				}
 		}
 	}
 
-	return (
-		<div
+	function customToastChild() {
+		return(
+			<div
 			id={`${date}`}
 			style={{
 				position: "fixed",
@@ -251,6 +271,11 @@ function CustomToast(props: CustomToastProps) {
 
 			
 		</div>
+		)
+	}
+
+	return (
+		<></>
 	)
 }
 

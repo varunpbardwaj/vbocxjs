@@ -1,6 +1,6 @@
 {
   "name": "vbocxjs",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "A ReactJS library for creating awesome banners and toasts.",
   "main": "lib/index.js",
   "files": ["lib"],
