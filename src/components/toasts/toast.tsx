@@ -174,6 +174,7 @@ function Toast(props: ToastProps) {
 			);
 			setTimeout(() => {
 				document.getElementById(bannerContainerId).removeChild(removeElement);
+				document.body.removeChild(document.getElementById(bannerContainerId));
 			}, 1000);
 		}  else if(props.animate && props.animate === "fade-in-out" && document.getElementById(`${date}`)) {
 					document.getElementById(`${date}`).animate(
@@ -187,6 +188,7 @@ function Toast(props: ToastProps) {
 					);
 					setTimeout(() => {
 						document.getElementById(bannerContainerId).removeChild(removeElement);
+						document.body.removeChild(document.getElementById(bannerContainerId));
 					}, 150);
 			}   else if(props.animate && props.animate === "zoom-in-out" && document.getElementById(`${date}`)) {
 				document.getElementById(`${date}`).animate(
@@ -200,10 +202,12 @@ function Toast(props: ToastProps) {
 				) 
 				setTimeout(() => {
 					document.getElementById(bannerContainerId).removeChild(removeElement);
+					document.body.removeChild(document.getElementById(bannerContainerId));
 				}, 350);
 			} else {
 				if(document.getElementById(`${date}`)) {
 					document.getElementById(bannerContainerId).removeChild(removeElement);
+					document.body.removeChild(document.getElementById(bannerContainerId));
 				}
 		}
 	}
