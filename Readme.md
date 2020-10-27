@@ -164,7 +164,7 @@ import { CustomToast } from "vbocxjs";
  message="This is a Custom Toast."
  backgroundColor="#d527ad"
  color="#FFFFFF"
- bannerIcon={<i className="fa fa-heart" aria-hidden="true"></i>}
+ toastIcon={<i className="fa fa-heart" aria-hidden="true"></i>}
  closeIcon={<i className="fa fa-times" aria-hidden="true"></i>}
 />
 ```
@@ -190,7 +190,7 @@ import { CustomToast } from "vbocxjs";
 |message|`string`|yes|Message to be displayed.|
 |backgroundColor|`string`|yes|Background Color of Toast.|
 |color|`string`|yes|Text Color of Toast.|
-|bannerIcon|`JSX.Element`, `Font Awesome Icons`|no|Icon indicating Toast type.|
+|toastIcon|`JSX.Element`, `Font Awesome Icons`|no|Icon indicating Toast type.|
 |closeIcon|`JSX.Element`, `Font Awesome Icons`|no|Icon replacing default close icon.|
 |timer|`number`|no|Display time of Toast in milliseconds.|
 |animate|`fade-in-out`, `zoom-in-out`, `stretch-in-out`|no|Popup out animation of the Toast.|
