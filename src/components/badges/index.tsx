@@ -51,8 +51,7 @@ function Badge(props: BadgeProps) {
                     fontFamily: " -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue'",
                     fontWeight: 500,
                     fontSize: "0.72rem",
-                    borderRadius: "2px",
-                    margin: "10px"
+                    borderRadius: "2px"
                 }}
             >
                 {props.message.toUpperCase()}
