@@ -227,9 +227,9 @@ import { Toast } from "vbocxjs";
 />
 ```
 
-##### Success Banner
+##### Success Toast
 ```
-import { Banner } from "vbocxjs";
+import { Toast } from "vbocxjs";
 
 <Toast
  variant="success"
@@ -301,4 +301,4 @@ import { CustomToast } from "vbocxjs";
 
 <br />
 <br />
-Made with ❤️  in 🇮🇳
+Made with ❤️   in 🇮🇳
