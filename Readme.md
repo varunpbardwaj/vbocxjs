@@ -86,7 +86,7 @@ import { CustomBanner } from "vbocxjs";
 
 |Name|Type|Mandatory|Description|
 |----|----|---------|-----------|
-|variant|`default`, `info`, `success`, `warning`, `error`|yes|The variant of the alert style to use.|
+|variant|`default`, `info`, `success`, `warning`, `error`|yes|The variant of the banner style to use.|
 |position|`top`, `middle`, `bottom`, `XX%`|no|Popup out position of the banner.|
 |message|`string`|yes|Message to be displayed.|
 |timer|`number`|no|Display time of banner in milliseconds.|
@@ -104,6 +104,105 @@ import { CustomBanner } from "vbocxjs";
 |closeIcon|`JSX.Element`, `Font Awesome Icons`|no|Icon replacing default close icon.|
 |timer|`number`|no|Display time of banner in milliseconds.|
 |animate|`fade-in-out`, `zoom-in-out`, `stretch-in-out`|no|Popup out animation of the banner.|
+<br />
+
+##  Badges
+
+##### Default Badge
+```
+import { Badge } from "vbocxjs";
+
+<Badge
+    type="solid"
+    variant="default"
+    message="solid"
+/>
+
+<Badge
+    type="outline"
+    variant="default"
+    message="outline"
+/>
+```
+
+##### Info Badge
+```
+import { Badge } from "vbocxjs";
+
+<Badge
+    type="solid"
+    variant="info"
+    message="solid"
+/>
+
+<Badge
+    type="outline"
+    variant="info"
+    message="outline"
+/>
+```
+
+##### Success Badge
+```
+import { Badge } from "vbocxjs";
+
+<Badge
+    type="solid"
+    variant="success"
+    message="solid"
+/>
+
+<Badge
+    type="outline"
+    variant="success"
+    message="outline"
+/>
+```
+
+##### Warning Badge
+```
+import { Badge } from "vbocxjs";
+
+<Badge
+    type="solid"
+    variant="warning"
+    message="solid"
+/>
+
+<Badge
+    type="outline"
+    variant="warning"
+    message="outline"
+/>
+```
+
+##### Error Badge
+```
+import { Badge } from "vbocxjs";
+
+<Badge
+    type="solid"
+    variant="error"
+    message="solid"
+/>
+
+<Badge
+    type="outline"
+    variant="error"
+    message="outline"
+/>
+```
+
+## Props
+
+### Badges Props
+
+|Name|Type|Mandatory|Description|
+|----|----|---------|-----------|
+|type|`solid`, `outline`|yes|Display type of the badge.|
+|variant|`default`, `info`, `success`, `warning`, `error`|yes|The variant of the badge style to use.|
+|message|`string`|yes|Message to be displayed.|
+
 <br />
 
 ##  Toasts
@@ -176,7 +275,7 @@ import { CustomToast } from "vbocxjs";
 
 |Name|Type|Mandatory|Description|
 |----|----|---------|-----------|
-|variant|`default`, `info`, `success`, `warning`, `error`|yes|The variant of the alert style to use.|
+|variant|`default`, `info`, `success`, `warning`, `error`|yes|The variant of the toast style to use.|
 |position|`top`, `middle`, `bottom`, `XX%`|no|Popup out position of the Toast.|
 |message|`string`|yes|Message to be displayed.|
 |timer|`number`|no|Display time of Toast in milliseconds.|
