@@ -2,9 +2,9 @@
   
 # vbocxjs
 
-Create banners and toasts with `speed`.
+Create banners, badges and toasts with `speed`.
 
-vbocxjs is a ReactJS library for creating banners and toasts with zero dependencies. It uses inline styling by reducing the amount of look up time for the CSS engine.
+vbocxjs is a ReactJS library for creating banners, badges and toasts with zero dependencies. It uses inline styling by reducing the amount of look up time for the CSS engine.
 
 ## Getting Started!
 
@@ -68,11 +68,11 @@ import { Banner } from "vbocxjs";
 ```
 ##### Custom Banner
 ```
-import { CustomBanner } from "vbocxjs";
+import { CustomBanner, Colors } from "vbocxjs";
 
 <CustomBanner
  message="This is a Custom Banner."
- backgroundColor="#d527ad"
+ backgroundColor={Colors["pink-600"]}
  color="#FFFFFF"
  bannerIcon={<i className="fa fa-heart" aria-hidden="true"></i>}
  closeIcon={<i className="fa fa-times" aria-hidden="true"></i>}
@@ -98,8 +98,8 @@ import { CustomBanner } from "vbocxjs";
 |----|----|---------|-----------|
 |position|`top`, `middle`, `bottom`, `XX%`|no|Popup out position of the banner.|
 |message|`string`|yes|Message to be displayed.|
-|backgroundColor|`string`|yes|Background Color of banner.|
-|color|`string`|yes|Text Color of banner.|
+|backgroundColor|`string`, `Colors[<value>]`|yes|Background Color of banner.|
+|color|`string`, `Colors[<value>]`|yes|Text Color of banner.|
 |bannerIcon|`JSX.Element`, `Font Awesome Icons`|no|Icon indicating banner type.|
 |closeIcon|`JSX.Element`, `Font Awesome Icons`|no|Icon replacing default close icon.|
 |timer|`number`|no|Display time of banner in milliseconds.|
@@ -257,11 +257,11 @@ import { Toast } from "vbocxjs";
 ```
 ##### Custom Toast
 ```
-import { CustomToast } from "vbocxjs";
+import { CustomToast, Colors } from "vbocxjs";
 
 <CustomToast
  message="This is a Custom Toast."
- backgroundColor="#d527ad"
+ backgroundColor={Colors["pink-600"]}
  color="#FFFFFF"
  toastIcon={<i className="fa fa-heart" aria-hidden="true"></i>}
  closeIcon={<i className="fa fa-times" aria-hidden="true"></i>}
@@ -287,14 +287,12 @@ import { CustomToast } from "vbocxjs";
 |----|----|---------|-----------|
 |position|`top`, `middle`, `bottom`, `XX%`|no|Popup out position of the Toast.|
 |message|`string`|yes|Message to be displayed.|
-|backgroundColor|`string`|yes|Background Color of Toast.|
-|color|`string`|yes|Text Color of Toast.|
+|backgroundColor|`string`, `Colors[<value>]`|yes|Background Color of Toast.|
+|color|`string`, `Colors[<value>]`|yes|Text Color of Toast.|
 |toastIcon|`JSX.Element`, `Font Awesome Icons`|no|Icon indicating Toast type.|
 |closeIcon|`JSX.Element`, `Font Awesome Icons`|no|Icon replacing default close icon.|
 |timer|`number`|no|Display time of Toast in milliseconds.|
 |animate|`fade-in-out`, `zoom-in-out`, `stretch-in-out`|no|Popup out animation of the Toast.|
-<br />
-<br />
 <br />
 
 > Note: vbocxjs comes with Font Awesome v4.7 out of the box.
