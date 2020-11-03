@@ -3,7 +3,17 @@ import BadgeProps from "../../props/badge.props";
 
 function Badge(props: BadgeProps) {
 
-	const date = `${props.variant}-${new Date().getTime()}`;
+	const input = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz'
+
+	function idGenerator(length: number, chars: string) {
+		let result = '';
+		for (let i = length; i > 0; --i) {
+			result += chars[Math.floor(Math.random() * chars.length)];
+		}
+		return result;
+	}
+
+	const uniqueid = `banners-${idGenerator(15, input)}`;
 
 	function variantColor() {
 		if(props.variant === "success") {
@@ -24,15 +34,14 @@ function Badge(props: BadgeProps) {
             {
             props.type === "outline" ?
             <div
-                id={date}
+                id={uniqueid}
                 style={{
                     display: "inline-block",
                     WebkitUserSelect: "none",
                     backgroundColor: "#FFFFFF00",
                     color: variantColor(),
                     border: `1px solid ${variantColor()}`,
-                    padding: "0px 3px 1px 3px",
-                    fontFamily: " -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue'",
+                    padding: "0px 3px 0px 3px",
                     fontWeight: 500,
                     fontSize: "0.72rem",
                     borderRadius: "2px"
@@ -41,14 +50,13 @@ function Badge(props: BadgeProps) {
                 {props.message.toUpperCase()}
             </div> :
             <div
-                id={date}
+                id={uniqueid}
                 style={{
                     display: "inline-block",
                     WebkitUserSelect: "none",
                     backgroundColor: variantColor(),
                     color: "#FFFFFF",
-                    padding: "0px 3px 1px 3px",
-                    fontFamily: " -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue'",
+                    padding: "0px 3px 0px 3px",
                     fontWeight: 500,
                     fontSize: "0.72rem",
                     borderRadius: "2px"

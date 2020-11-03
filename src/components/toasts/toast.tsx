@@ -4,10 +4,92 @@ import { render } from "react-dom";
 
 function Toast(props: ToastProps) {
 
-	const date = `error-${new Date().getTime()}`;
-	const bannerContainerId = `vbocxjs-toast-container-${new Date().getTime()}`;
+	const input = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz'
+
+	function idGenerator(length: number, chars: string) {
+		let result = '';
+		for (let i = length; i > 0; --i) {
+			result += chars[Math.floor(Math.random() * chars.length)];
+		}
+		return result;
+	}
+
+	const uniqueid = `toasts-${idGenerator(15, input)}`;
+	const bannerContainerId = `vbocxjs-toast-container-${uniqueid}`;
 
 	useEffect(() => {
+
+		function toastChild() {
+			return (
+				<div
+				id={`${uniqueid}`}
+				style={{
+					position: "fixed",
+					width: "100%",
+					minHeight: "80px",
+					backgroundColor: "#ffffff00",
+					bottom: toastTop(),
+					zIndex: 9999,
+					display: "flex",
+					flexDirection: "column",
+					justifyContent: "center",
+					alignItems: "center",
+					WebkitUserSelect: "none",
+					padding: "10px"
+				}}
+			>
+				<div id={`toast-div-${uniqueid}`} style={{
+					maxWidth: "50%",
+					backgroundColor: variantColor(),
+					display: "flex",
+					justifyContent: "center",
+					alignItems: "center",
+					fontSize: "15px",
+					fontWeight: 600,
+					color: "#FFFFFF",
+					borderRadius: "4px",
+					padding: "15px",
+					boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)"
+				}}>
+				<div style={{
+						width: "100%",
+						height: "auto",
+						display: "flex",
+						justifyContent: "space-between",
+						alignItems: "center"
+					}}
+				>
+					<div style={{
+						display: "flex",
+						justifyContent: "flex-start",
+						alignItems: "center",
+					}}>
+						<i className={toastIcons()} aria-hidden="true"></i>
+						<div style={{marginLeft: "10px", marginRight: "10px",  padding: "5px"}}>
+							{props.message}
+						</div>
+					</div>
+					<i
+						className="fa fa-times"
+						aria-hidden="true"
+						style={{
+							cursor: "pointer"
+						}}
+						onClick={() => {
+							removeToast();
+						}}
+					></i>
+				</div>
+				</div>
+				{props.timer ?<div id={`timeout-view-${uniqueid}`} style={{position:"relative", marginTop: "-5px", borderBottomLeftRadius: "4px", borderBottomRightRadius: "4px",  backgroundColor: "rgba(0, 0, 0, 0.15)"}}>
+					<div id={`remain-view-${uniqueid}`} style={{height: "5px", backgroundColor: "rgba(255, 255, 255, 0.4)"}}>
+	
+					</div>
+				</div> : null
+				}
+			</div>
+			)
+		}
 
 		const bannerContainer = document.createElement("div");
 		bannerContainer.id = bannerContainerId;
@@ -21,10 +103,10 @@ function Toast(props: ToastProps) {
 		render(toastChild(), document.getElementById(bannerContainerId));
 
 		const observer = setInterval(function () {
-			if (document.getElementById(`${date}`)) {
+			if (document.getElementById(`${uniqueid}`)) {
 			  clearInterval(observer);
-			  if(props.animate && props.animate === "stretch-in-out" && document.getElementById(`${date}`)) {
-				document.getElementById(`${date}`).animate(
+			  if(props.animate && props.animate === "stretch-in-out" && document.getElementById(`${uniqueid}`)) {
+				document.getElementById(`${uniqueid}`).animate(
 					[
 						{ transform: 'scale3d(1, 1, 1)' }, 
 						{ transform: 'scale3d(1.2, 0.7, 1)' },
@@ -39,7 +121,7 @@ function Toast(props: ToastProps) {
 					  }
 				);
 			} else if(props.animate && props.animate === "fade-in-out") {
-				document.getElementById(`${date}`).animate(
+				document.getElementById(`${uniqueid}`).animate(
 					[
 						{opacity: 0},
 						{opacity: 1}
@@ -48,8 +130,8 @@ function Toast(props: ToastProps) {
 						iterations: 1
 					  }
 				);
-		}  else if(props.animate && props.animate === "zoom-in-out" && document.getElementById(`${date}`)) {
-				document.getElementById(`${date}`).animate(
+		}  else if(props.animate && props.animate === "zoom-in-out" && document.getElementById(`${uniqueid}`)) {
+				document.getElementById(`${uniqueid}`).animate(
 					[
 						{transform: 'scale3d(1.3, 1.3, 1.3)', opacity: 0},
 						{transform: 'scale3d(1, 1, 1)', opacity: 1}
@@ -60,12 +142,12 @@ function Toast(props: ToastProps) {
 				);
 		}
 	
-			if(document.getElementById(`${date}`)) {
+			if(document.getElementById(`${uniqueid}`)) {
 				if(props.timer) {
 					setTimeout(() => {
-						const removeElement = document.getElementById(`${date}`);
-						if(props.animate && props.animate === "stretch-in-out" && document.getElementById(`${date}`)) {
-							document.getElementById(`${date}`).animate(
+						const removeElement = document.getElementById(`${uniqueid}`);
+						if(props.animate && props.animate === "stretch-in-out" && document.getElementById(`${uniqueid}`)) {
+							document.getElementById(`${uniqueid}`).animate(
 								[
 									{ transform: 'scale3d(1, 1, 1)' }, 
 									{ transform: 'scale3d(1.25, 0.75, 1)' },
@@ -83,8 +165,8 @@ function Toast(props: ToastProps) {
 								document.getElementById(bannerContainerId).removeChild(removeElement);
 								document.body.removeChild(document.getElementById(bannerContainerId));
 							}, 1000);
-						} else if(props.animate && props.animate === "fade-in-out" && document.getElementById(`${date}`)) {
-								document.getElementById(`${date}`).animate(
+						} else if(props.animate && props.animate === "fade-in-out" && document.getElementById(`${uniqueid}`)) {
+								document.getElementById(`${uniqueid}`).animate(
 									[
 										{opacity: 1},
 										{opacity: 0}
@@ -97,8 +179,8 @@ function Toast(props: ToastProps) {
 									document.getElementById(bannerContainerId).removeChild(removeElement);
 									document.body.removeChild(document.getElementById(bannerContainerId));
 								}, 150);
-						}   else if(props.animate && props.animate === "zoom-in-out" && document.getElementById(`${date}`)) {
-							document.getElementById(`${date}`).animate(
+						}   else if(props.animate && props.animate === "zoom-in-out" && document.getElementById(`${uniqueid}`)) {
+							document.getElementById(`${uniqueid}`).animate(
 								[
 									{transform: 'scale3d(1, 1, 1)', opacity: 1},
 									{transform: 'scale3d(1.2, 1.2, 1.2)', opacity: 0}
@@ -112,7 +194,7 @@ function Toast(props: ToastProps) {
 								document.body.removeChild(document.getElementById(bannerContainerId));
 							}, 350);
 						} else {
-							if(document.getElementById(`${date}`)) {
+							if(document.getElementById(`${uniqueid}`)) {
 								document.getElementById(bannerContainerId).removeChild(removeElement);
 								document.body.removeChild(document.getElementById(bannerContainerId));
 							}
@@ -123,177 +205,139 @@ function Toast(props: ToastProps) {
 			}
 		}, 1);
 
-	}, [props.timer, date]);
-
-	function bannerTop() {
-		if(props.position) {
-			if(props.position === "top") {
-				return ""
-			} else if(props.position === "middle") {
-				return "50%"
-			} else if(props.position === "bottom") {
-				return "0%"
-			} else {
-				return props.position
-			}
-		} else {
-			return ""
-		}
-	}
-	
-	function variantColor() {
-		if(props.variant === "success") {
-			return "#72b55e"
-		} else if(props.variant === "error") {
-			return "#f54444"
-		} else if(props.variant === "warning") {
-			return "#e5b30d"
-		} else if(props.variant === "info") {
-            return "#537dbc"
-        } else {
-			return "#74797e"
-		}
-	}
-
-	function removeToast() {
-		const removeElement = document.getElementById(`${date}`);
-		if(props.animate && props.animate === "stretch-in-out" && document.getElementById(`${date}`)) {
-			document.getElementById(`${date}`).animate(
+		const observerTimeout = setInterval(function () {
+			if (document.getElementById(`toast-div-${uniqueid}`) && props.timer) {
+			  clearInterval(observerTimeout);
+			  const getToastWidth = document.getElementById(`toast-div-${uniqueid}`).offsetWidth;
+			  document.getElementById(`timeout-view-${uniqueid}`).style.width = `${getToastWidth}px`;
+			  document.getElementById(`remain-view-${uniqueid}`).animate(
 				[
-					{ transform: 'scale3d(1, 1, 1)' }, 
-					{ transform: 'scale3d(1.2, 0.7, 1)' },
-					{ transform: 'scale3d(0.7, 1.2, 1)' }, 
-					{ transform: 'scale3d(1.1, 0.8, 1)' },
-					{ transform: 'scale3d(0.9, 1, 1)' },
-					{ transform: 'scale3d(1, 0.9, 1)' }, 
-					{ transform: 'scale3d(1, 1, 1)' },
-				],{
-					duration: 800,
-					iterations: 1
-				}
+					{width: "100%"},
+					{width: "0%"}
+				], {
+					duration: props.timer,
+					iterations: 1,
+					easing: "linear"
+				  }
 			);
-			setTimeout(() => {
-				document.getElementById(bannerContainerId).removeChild(removeElement);
-				document.body.removeChild(document.getElementById(bannerContainerId));
-			}, 1000);
-		}  else if(props.animate && props.animate === "fade-in-out" && document.getElementById(`${date}`)) {
-					document.getElementById(`${date}`).animate(
-						[
-							{opacity: 1},
-							{opacity: 0}
-						], {
-							duration: 200,
-							iterations: 1
-						}
-					);
-					setTimeout(() => {
-						document.getElementById(bannerContainerId).removeChild(removeElement);
-						document.body.removeChild(document.getElementById(bannerContainerId));
-					}, 150);
-			}   else if(props.animate && props.animate === "zoom-in-out" && document.getElementById(`${date}`)) {
-				document.getElementById(`${date}`).animate(
+			}
+		}, 1);
+
+		function toastIcons() {
+			if(props.variant === "success") {
+				return "fa fa-check-circle"
+			} else if(props.variant === "error") {
+				return "fa fa-exclamation-triangle"
+			} else if(props.variant === "warning") {
+				return "fa fa-exclamation-circle"
+			 }  else if(props.variant === "info"){
+				return "fa fa-info-circle"
+			} else {
+				return ""
+			}
+		}
+
+		function toastTop() {
+			if(props.position) {
+				if(props.position === "top") {
+					return ""
+				} else if(props.position === "middle") {
+					return "50%"
+				} else if(props.position === "bottom") {
+					return "0%"
+				} else {
+					return props.position
+				}
+			} else {
+				return "0%"
+			}
+		}
+		
+		function variantColor() {
+			if(props.variant === "success") {
+				return "#72b55e"
+			} else if(props.variant === "error") {
+				return "#f54444"
+			} else if(props.variant === "warning") {
+				return "#e5b30d"
+			} else if(props.variant === "info") {
+				return "#537dbc"
+			} else {
+				return "#74797e"
+			}
+		}
+	
+		function removeToast() {
+			const removeElement = document.getElementById(`${uniqueid}`);
+			if(props.animate && props.animate === "stretch-in-out" && document.getElementById(`${uniqueid}`)) {
+				document.getElementById(`${uniqueid}`).animate(
 					[
-						{transform: 'scale3d(1, 1, 1)', opacity: 1},
-						{transform: 'scale3d(1.2, 1.2, 1.2)', opacity: 0}
-					], {
-						duration: 400,
+						{ transform: 'scale3d(1, 1, 1)' }, 
+						{ transform: 'scale3d(1.2, 0.7, 1)' },
+						{ transform: 'scale3d(0.7, 1.2, 1)' }, 
+						{ transform: 'scale3d(1.1, 0.8, 1)' },
+						{ transform: 'scale3d(0.9, 1, 1)' },
+						{ transform: 'scale3d(1, 0.9, 1)' }, 
+						{ transform: 'scale3d(1, 1, 1)' },
+					],{
+						duration: 800,
 						iterations: 1
-					  }
-				) 
+					}
+				);
 				setTimeout(() => {
 					document.getElementById(bannerContainerId).removeChild(removeElement);
 					document.body.removeChild(document.getElementById(bannerContainerId));
-				}, 350);
-			} else {
-				if(document.getElementById(`${date}`)) {
-					document.getElementById(bannerContainerId).removeChild(removeElement);
-					document.body.removeChild(document.getElementById(bannerContainerId));
-				}
+				}, 1000);
+			}  else if(props.animate && props.animate === "fade-in-out" && document.getElementById(`${uniqueid}`)) {
+						document.getElementById(`${uniqueid}`).animate(
+							[
+								{opacity: 1},
+								{opacity: 0}
+							], {
+								duration: 200,
+								iterations: 1
+							}
+						);
+						setTimeout(() => {
+							document.getElementById(bannerContainerId).removeChild(removeElement);
+							document.body.removeChild(document.getElementById(bannerContainerId));
+						}, 150);
+				}   else if(props.animate && props.animate === "zoom-in-out" && document.getElementById(`${uniqueid}`)) {
+					document.getElementById(`${uniqueid}`).animate(
+						[
+							{transform: 'scale3d(1, 1, 1)', opacity: 1},
+							{transform: 'scale3d(1.2, 1.2, 1.2)', opacity: 0}
+						], {
+							duration: 400,
+							iterations: 1
+						  }
+					) 
+					setTimeout(() => {
+						document.getElementById(bannerContainerId).removeChild(removeElement);
+						document.body.removeChild(document.getElementById(bannerContainerId));
+					}, 350);
+				} else {
+					if(document.getElementById(`${uniqueid}`)) {
+						document.getElementById(bannerContainerId).removeChild(removeElement);
+						document.body.removeChild(document.getElementById(bannerContainerId));
+					}
+			}
 		}
-	}
 
-	function toastIcons() {
-		if(props.variant === "success") {
-			return "fa fa-check-circle"
-		} else if(props.variant === "error") {
-			return "fa fa-exclamation-triangle"
-		} else if(props.variant === "warning") {
-			return "fa fa-exclamation-circle"
-		 }  else if(props.variant === "info"){
-			return "fa fa-info-circle"
-		} else {
-			return ""
-		}
-	}
+	}, [bannerContainerId, props.position, props.animate, props.message, props.variant, props.timer, uniqueid]);
 
-	function toastChild() {
-		return (
-			<div
-			id={`${date}`}
-			style={{
-				position: "fixed",
-				width: "100%",
-				minHeight: "80px",
-				backgroundColor: "#ffffff00",
-				bottom: bannerTop(),
-				zIndex: 9999,
-				display: "flex",
-				justifyContent: "center",
-				alignItems: "center",
-				WebkitUserSelect: "none"
-			}}
-		>
-			<div style={{
-				maxWidth: "50%",
-				backgroundColor: variantColor(),
-				display: "flex",
-				justifyContent: "center",
-				alignItems: "center",
-				padding: "15px",
-				fontSize: "15px",
-				fontWeight: 600,
-				fontFamily: " -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue'",
-				color: "#FFFFFF",
-				borderRadius: "4px",
-				boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)"
-			}}>
-
-			<div style={{
-					width: "100%",
-					height: "auto",
-					display: "flex",
-					justifyContent: "space-between",
-					alignItems: "center"
-				}}
-			>
-				<div style={{
-					display: "flex",
-					justifyContent: "flex-start",
-					alignItems: "center",
-				}}>
-					<i className={toastIcons()} aria-hidden="true"></i>
-					<div style={{marginLeft: "10px", marginRight: "10px", textAlign: "justify", textJustify: "inter-word", padding: "5px"}}>
-						{props.message}
-					</div>
-				</div>
-				<i
-					className="fa fa-times"
-					aria-hidden="true"
-					style={{
-						cursor: "pointer"
-					}}
-					onClick={() => {
-						removeToast();
-					}}
-				></i>
-			</div>
-
-			</div>
-
-			
-		</div>
-		)
-	}
+	useEffect(() => {
+		const handleResize = () => {
+			if(document.getElementById(`toast-div-${uniqueid}`) && props.timer) {
+				const getToastWidth = document.getElementById(`toast-div-${uniqueid}`).offsetWidth;
+				document.getElementById(`timeout-view-${uniqueid}`).style.width = `${getToastWidth}px`;
+			}
+		};
+		window.addEventListener('resize', handleResize);
+		return () => {
+		  window.removeEventListener('resize', handleResize);
+		};
+	  });
 
 	return (
 		<></>

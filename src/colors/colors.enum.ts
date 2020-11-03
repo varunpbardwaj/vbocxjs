@@ -1,4 +1,4 @@
-enum Colors {
+enum ThemeColors {
     'red' = '#c0392b',
     'red-50' = '#f9ebea',
     'red-100' = '#f2d7d5',
@@ -101,4 +101,4 @@ enum Colors {
     'white' = "#ffffff"
   }
   
-  export default Colors;
+  export default ThemeColors;
