@@ -341,27 +341,27 @@ import { Donut, Colors } from "vbocxjs";
 <Donut
     size={80}
     percent={69}
-    theme={[Pink["pink-500"], "#000000", Gray["gray-50"]]}
+    theme={[Colors["pink-500"], "#000000", Colors["gray-50"]]}
 />
 
 <Donut
     size={100}
     percent={32}
-    theme={[Blue["blue-500"], "#000000", Gray["gray-50"]]}
+    theme={[Colors["blue-500"], "#000000", Colors["gray-50"]]}
     hidePercentText={true}
 />
 
 <Donut
     size={120}
     percent={54}
-    theme={[Green["green-500"], "#000000", Gray["gray-50"]]}
+    theme={[Colors["green-500"], "#000000", Colors["gray-50"]]}
     curvedEdge={true}
 />
 
 <Donut
     size={140}
     percent={80}
-    gradient={["#12c2e9", "#c471ed", "", Gray["gray-50"]]}
+    gradient={["#12c2e9", "#c471ed", "", Colors["gray-50"]]}
     hidePercentText={true}
     curvedEdge={true}
 />
@@ -398,20 +398,20 @@ import { Kulfi, Colors } from "vbocxjs";
 <Kulfi
     length={350}
     percent={32}
-    theme={["#3DB4EA", "#FFFFFF", Gray["gray-100"]]}
+    theme={["#3DB4EA", "#FFFFFF", Colors["gray-100"]]}
     hidePercentText={true}
 />
 
 <Kulfi
     length={600}
     percent={66}
-    gradient={["#DE24B1", "#4C6ADD", "#FFFFFF", Gray["gray-100"]]}
+    gradient={["#DE24B1", "#4C6ADD", "#FFFFFF", Colors["gray-100"]]}
 />
 
 <Kulfi
     length={500}
     percent={88}
-    theme={["#D04427", "#FFFFFF", Gray["gray-100"]]}
+    theme={["#D04427", "#FFFFFF", Colors["gray-100"]]}
     curvedEdge={true}
 />
 
